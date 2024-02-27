@@ -1,7 +1,8 @@
 import { graph, config } from "@grafbase/sdk";
 
 const g = graph.Standalone();
-const User = g.type("User", {
+
+const User = g.model("User", {
   name: g.string().length({ min: 2, max: 20 }),
   email: g.string().unique(),
   avatarUrl: g.url(),
@@ -11,16 +12,16 @@ const User = g.type("User", {
   projects: g.relation(() => Project.list().optional()),
 });
 
-const Project = g.type("Project", {
+const Project = g.model("Project", {
   title: g.string().length({ min: 3 }),
   description: g.string(),
   image: g.url(),
   liveSiteUrl: g.url(),
   githubUrl: g.url(),
   category: g.string().search(),
-  createdBy: g.ref(User),
+  createdBy: g.relation(() => User),
 });
 
 export default config({
-  graph: g,
+  schema: g,
 });
