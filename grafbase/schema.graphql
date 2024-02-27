@@ -1,8 +1,0 @@
-type User @model {
-  name: String,
-  email: String,
-  avatarUrl: String,
-  description: String,
-  githubUrl: String,
-  linkedInUrl: String,
-}
