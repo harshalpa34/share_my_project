@@ -1,29 +1,27 @@
-import { g, config,  } from '@grafbase/sdk';
+import { config, graph } from "@grafbase/sdk";
 
-// @ts-ignore
-const User = g.model('User', {
-  name: g.string().length({ min: 2, max: 100 }),
-  email: g.string().unique(),
+const g = graph.Standalone();
+
+const User = g.type("User", {
+  name: g.string(),
+  email: g.string(),
   avatarUrl: g.url(),
-  description: g.string().length({ min: 2, max: 1000 }).optional(),
+  description: g.string(),
   githubUrl: g.url().optional(),
-  linkedinUrl: g.url().optional(), 
-  projects: g.relation(() => Project).list().optional(),
-})
+  linkedInUrl: g.url().optional(),
+  // projects: g.ref(Project),
+});
 
-// @ts-ignore
-const Project = g.model('Project', {
-  title: g.string().length({ min: 3 }),
-  description: g.string(), 
+const Project = g.type("Project", {
+  title: g.string(),
+  description: g.string(),
   image: g.url(),
-  liveSiteUrl: g.url(), 
-  githubUrl: g.url(), 
-  category: g.string().search(),
-  createdBy: g.relation(() => User),
-})
-
+  liveSiteUrl: g.url(),
+  githubUrl: g.url(),
+  category: g.string(),
+  createdBy: g.ref(User),
+});
 
 export default config({
-  schema: g,
- 
-})
+  graph: g,
+});
