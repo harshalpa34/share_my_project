@@ -1,6 +1,5 @@
-import { config, graph} from "@grafbase/sdk";
+import { config, g } from "@grafbase/sdk";
 
-const g = graph.Standalone();
 
 const User = g.model("User", {
   name: g.string().length({ min: 2, max: 20 }),
@@ -23,5 +22,5 @@ const Project = g.model("Project", {
 });
 
 export default config({
-  graph: g,
+  schema: g,
 });
