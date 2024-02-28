@@ -1,4 +1,4 @@
-import { graph, config } from "@grafbase/sdk";
+import { config, graph} from "@grafbase/sdk";
 
 const g = graph.Standalone();
 
@@ -23,5 +23,5 @@ const Project = g.model("Project", {
 });
 
 export default config({
-  schema: g,
+  graph: g,
 });
